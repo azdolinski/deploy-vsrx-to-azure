@@ -12,8 +12,6 @@
         "vSRX-model": {
           "type": "string",
           "allowedValues": [
-            "vSRX Next Generation Firewall (PAYG)",
-            "vSRX Premium-NGW with Advenced Security (PAYG)",
             "vSRX Next Generation Firewall (BYOL)"
           ],
           "metadata": {
@@ -154,38 +152,16 @@
         "vsrx-pip-fxp0-id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('vsrxVM').pipNameFxp0)]",
         "vsrx-pip-ge000-id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('vsrxVM').pipNameGe000)]",
 
-        "plan-payg": {
+        "plan-byol": {
           "name": "vsrx-azure-image-byol",
           "publisher": "juniper-networks",
           "product": "vsrx-next-generation-firewall-payg"
         },
-        "plan-payg-b1": {
-          "name": "vsrx-azure-image-payg-b1",
-          "publisher": "juniper-networks",
-          "product": "vsrx-next-generation-firewall-payg"
-        },
-	    	"plan-payg-b2": {
-          "name": "vsrx-azure-image-payg-b2",
-          "publisher": "juniper-networks",
-          "product": "vsrx-next-generation-firewall-payg"
-        },
-        
+
         "image-byol": {
           "publisher": "juniper-networks",
           "offer": "vsrx-next-generation-firewall-payg",
           "sku": "vsrx-azure-image-byol",
-          "version": "latest"
-        },
-        "image-payg-b1": {
-          "publisher": "juniper-networks",
-          "offer": "vsrx-next-generation-firewall-payg",
-          "sku": "vsrx-azure-image-payg-b1",
-          "version": "latest"
-        },
-        "image-payg-b2": {
-          "publisher": "juniper-networks",
-          "offer": "vsrx-next-generation-firewall-payg",
-          "sku": "vsrx-azure-image-payg-b2",
           "version": "latest"
         }
     },
@@ -208,7 +184,7 @@
           "properties": {
             "publicIPAllocationMethod": "Dynamic",
             "dnsSettings": {
-              "domainNameLabel": "[concat(variables('vsrxVM').pipNameFxp0, resourceGroup().name)]"
+              "domainNameLabel": "[toLower(concat(variables('vsrxVM').pipNameFxp0, replace(resourceGroup().name, '_', '') ))]"
             }
           }
         },
@@ -220,7 +196,7 @@
           "properties": {
             "publicIPAllocationMethod": "Dynamic",
             "dnsSettings": {
-              "domainNameLabel": "[concat(variables('vsrxVM').pipNameGe000, resourceGroup().name)]"
+              "domainNameLabel": "[toLower(concat(variables('vsrxVM').pipNameGe000, replace(resourceGroup().name, '_', '')  ))]"
             }
           }
         },
@@ -390,7 +366,7 @@
           "name": "[variables('vsrxVM').vmName]",
           "type": "Microsoft.Compute/virtualMachines",
           "location": "[resourceGroup().location]",
-	  "plan": "[if(equals(parameters('vSRX-model'), 'BYOL'), variables('plan-byol'), variables('plan-payg-b2'), variables('plan-payg-b1'))]",
+	        "plan": "[variables('plan-byol')]",
            "dependsOn": [
              "[concat('Microsoft.Network/networkInterfaces/', variables('vsrxVM').mgtNicName)]",
              "[concat('Microsoft.Network/networkInterfaces/', variables('vsrxVM').untrustNicName)]",
