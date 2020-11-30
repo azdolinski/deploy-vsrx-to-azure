@@ -153,9 +153,9 @@
 
         "vsrx-pip-fxp0-id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('vsrxVM').pipNameFxp0)]",
         "vsrx-pip-ge000-id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('vsrxVM').pipNameGe000)]",
-        
-	    	"plan-payg-b2": {
-          "name": "vsrx-azure-image-payg-b2",
+
+        "plan-payg": {
+          "name": "vsrx-azure-image-byol",
           "publisher": "juniper-networks",
           "product": "vsrx-next-generation-firewall-payg"
         },
@@ -164,11 +164,12 @@
           "publisher": "juniper-networks",
           "product": "vsrx-next-generation-firewall-payg"
         },
-        "plan-payg": {
-          "name": "vsrx-azure-image-byol",
+	    	"plan-payg-b2": {
+          "name": "vsrx-azure-image-payg-b2",
           "publisher": "juniper-networks",
           "product": "vsrx-next-generation-firewall-payg"
         },
+        
         "image-byol": {
           "publisher": "juniper-networks",
           "offer": "vsrx-next-generation-firewall-payg",
