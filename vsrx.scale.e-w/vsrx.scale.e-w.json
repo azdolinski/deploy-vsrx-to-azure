@@ -140,8 +140,8 @@
       "vsrxVM": {
           "vmSize": "Standard_DS3_v2",
           "publisher": "juniper-networks",
-          "offer": "vsrx-next-generation-firewall",
-          "sku": "vsrx-byol-azure-image",
+          "offer": "vsrx-next-generation-firewall-payg",
+          "sku": "vsrx-azure-image-byol",
           "version": "latest",
           "vmName": "[parameters('vsrx-name')]",
           "baseDisk": "[concat('https://', parameters('storageAccountName'), '.blob.core.windows.net/', parameters('storageContainerName'), '/', parameters('vsrx-disk'))]"
