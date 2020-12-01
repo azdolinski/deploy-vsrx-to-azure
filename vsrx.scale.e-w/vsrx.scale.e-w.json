@@ -1,6 +1,6 @@
 
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
 
     "parameters": {
@@ -8,92 +8,107 @@
           "type": "string",
           "metadata": {
             "description": "Storage Account Name"
-          }
+          },
+          "defaultValue": "juniperstore07"
         },
         "storageContainerName": {
           "type": "string",
           "metadata": {
             "description": "Storage Container Name"
-          }
+          },
+          "defaultValue": "vhds"
         },
         "vsrx-name": {
           "type": "string",
           "metadata": {
             "description": "vSRX Name"
-          }
+          },
+          "defaultValue": "vsrx"
         },
         "vsrx-username": {
           "type": "string",
           "metadata": {
             "description": "vSRX user name"
-          }
+          },
+          "defaultValue": "demo"
         },
         "vsrx-password": {
           "type": "securestring",
           "metadata": {
             "description": "vSRX user password"
-          }
+          },
+          "defaultValue": "Demo123456"
         },
         "vsrx-sshkey": {
           "type": "string",
           "metadata": {
             "description": "vSRX user SSH rsa public key"
-          }
+          },
+          "defaultValue": "ssh-rsa placeholder"
         },
         "vsrx-disk": {
           "type": "string",
           "metadata": {
             "description": "vSRX disk name"
-          }
+          },
+          "defaultValue": "placeholder"
         },
         "vnet-prefix": {
           "type": "string",
           "metadata": {
             "description": "Virtual network prefix"
-          }
+          },
+          "defaultValue": "10.0.0.0/16"
         },
         "vnet-mgt-subnet-prefix": {
           "type": "string",
           "metadata": {
             "description": "Management subnet prefix"
-          }
+          },
+          "defaultValue": "10.0.0.0/24"
         },
         "vnet-west-subnet-prefix": {
           "type": "string",
           "metadata": {
             "description": "West subnet prefix"
-          }
+          },
+          "defaultValue": "10.0.2.0/24"
         },
         "vnet-east-subnet-prefix": {
           "type": "string",
           "metadata": {
             "description": "East subnet prefix"
-          }
+          },
+          "defaultValue": "10.0.3.0/24"
         },
         "vnet-north-subnet-prefix": {
           "type": "string",
           "metadata": {
             "description": "North subnet prefix"
-          }
+          },
+          "defaultValue": "10.0.4.0/24"
         },
         "vnet-south-subnet-prefix": {
           "type": "string",
           "metadata": {
             "description": "South subnet prefix"
-          }
+          },
+          "defaultValue": "10.0.5.0/24"
         },
         "ilb-front-end-ip": {
           "type": "string",
           "metadata": {
             "description": "Internal load balancer front-end IP"
-          }
+          },
+          "defaultValue": "10.0.5.10"
         },
         "customData": {
           "type": "string",
           "defaultValue": "echo customData",
           "metadata" : { 
             "description": "String passed down to the Virtual Machine."
-          }   
+          },
+          "defaultValue": "customdata placeholder"
         }
     },
 
@@ -138,7 +153,7 @@
       "ilbProbeID": "[concat(variables('ilbID'),'/probes/',variables('ilbProbeName'))]",
 
       "vsrxVM": {
-          "vmSize": "Standard_DS3_v2",
+          "vmSize": "Standard_DS2_v2",
           "publisher": "juniper-networks",
           "offer": "vsrx-next-generation-firewall-payg",
           "sku": "vsrx-azure-image-byol",
